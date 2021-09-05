@@ -10,5 +10,5 @@ variable "user_event_bucket_arn" {
 variable "user_utm_bucket_arn" {
 }
 
-variable "kinesis_role" {
+variable "kinesis_role_arn" {
 }

@@ -1,3 +1,8 @@
+provider "aws" {
+  region = "eu-central-1"
+}
+
+
 module "buckets" {
   source = "./infrastructure/account_a/buckets"
 }
@@ -6,9 +11,15 @@ module "roles" {
   source = "./infrastructure/account_a/roles"
 }
 
+module "policy" {
+  source = "./infrastructure/account_a/policy"
+  kinesis_role_name = module.roles.kinesis_role_name
+}
+
+
 module "firehose_stream" {
   source = "./infrastructure/account_a/kinesis"
   user_event_bucket_arn = module.buckets.user_event_bucket_arn
   user_utm_bucket_arn = module.buckets.user_utm_bucket_arn
-  kinesis_role = module.roles.kinesis_role
+  kinesis_role_arn = module.roles.kinesis_role_arn
 }

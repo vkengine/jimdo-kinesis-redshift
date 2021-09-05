@@ -1,6 +1,6 @@
 provider "aws" {
   profile = "default"
-  region  = var.firehose_role
+  region  = var.firehose_role_region
 }
 
 resource "aws_iam_role" "firehose_role" {
