@@ -1,0 +1,12 @@
+# terraform files
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.lock.*
+*.plan.*
+
+# ide files
+.idea
+
+#python
+venv
