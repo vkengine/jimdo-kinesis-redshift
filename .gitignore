@@ -4,7 +4,7 @@
 *.tfstate.*
 *.lock.*
 *.plan.*
-build
+builds
 
 # ide files
 .idea

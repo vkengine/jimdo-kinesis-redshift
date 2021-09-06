@@ -103,22 +103,24 @@ create these two files in project :
 this should from account_a with s3 access
 path to put this env file :
 Project/
-|-- infrastructure (all terraform script)/
-|   |-- account_a(resources specific to account a)
-|   |-- account_b(resources specific to account b)
-|       |--buckets 
-|       |--redshift
-|       |--roles
-|       |--secirity_groups
-|       |--lambda
-|           |--s3_lambda_redshift
-|           |-- .env(place it here as for it to be packaged and deployed)
+|--s3_lambda_redshift
+|   |-- .env(place it here as for it to be packaged and deployed)
 
+```
 
 .env file content: 
-
-access_key_id=<your_value>
-secret_access_key=<your_key>
+```
+access_key_id=<account_a>
+secret_access_key=<account_b>
+event_bucket=<account_a>
+utm_bucket=<account_a>
+redshift_access_key=<account_b>
+redshift_access_key_secret=<account_b>
+RS_HOST=<ouput_from_terraform>
+RS_USERNAME=<pre_defined>
+RS_PORT=<ouput_from_terraform>
+DATABASE=<pre_defined>
+bucket_region=<pre_defined>
 ```
 * build.tfvars
 ```
@@ -127,10 +129,10 @@ Project/
 |-- infrastructure (all terraform script)/
 |-- python script/
 |-- build.tfvars
-
+```
 
 content of build.tfvars :
-
+```
 redshift_master_username = <your_username>
 redshift_mastr_password = <your_password>
 ```
@@ -156,7 +158,8 @@ redshift_mastr_password = <your_password>
    * creates redshift table in public schema
    
 
-# TODO :
-* lambda deployment - terraform (minor)
+## WILL NOT DO :
 * script to scale up scale down redshift cluster (major - outside scope of this project)
+* VPC's, Security group, subnets (outside the scope of project)
+* fine-grained policies and roles
 
