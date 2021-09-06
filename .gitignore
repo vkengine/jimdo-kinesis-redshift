@@ -10,3 +10,5 @@
 
 #python
 venv
+.env
+*.tfvars

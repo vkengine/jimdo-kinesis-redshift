@@ -69,6 +69,32 @@ Project/
 ```
 
 ## Getting Started
+create these two files in project root :
+* .env
+```
+this should from account a with s3 access
+access_key_id=<your_value>
+secret_access_key=<your_key>
+```
+* build.tfvars
+```
+redshift_master_username = <your_username>
+redshift_mastr_password = <your_password>
+```
 
+1. To create Infra:
+```make create-infra```
+   
+2. to create some dummy data:
+```make create-infra```
+   
+3. To destroy infra:
+```make destroy```
+   
 
+# TODO :
+* lambda deployment - terraform (minor)
+* parmetrize lambda - to look for file in a bucket with provided keys (major)
+* script to scale up scale down redshift cluster (major - outside scope of this project)
+* fix readme (minor)
 

@@ -1,0 +1,15 @@
+{"jsonpaths":
+  [
+    "$.request_id",
+    "$.request_timestamp",
+    "$.cookie_id",
+    "$.topic",
+    "$.message",
+    "$.environment",
+    "$.website_id",
+    "$.user_account_id",
+    "$.location",
+    "$.user_agent",
+    "$.referrer"
+  ]
+}

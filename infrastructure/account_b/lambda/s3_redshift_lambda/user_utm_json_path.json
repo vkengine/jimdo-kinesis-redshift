@@ -1,0 +1,18 @@
+{"jsonpaths":
+  [
+    "$.request_id",
+    "$.source",
+    "$.medium",
+    "$.campaign",
+    "$.content",
+    "$.term",
+    "$.matchtype",
+    "$.network",
+    "$.ad_id",
+    "$.ad_pos",
+    "$.placement",
+    "$.placement_category",
+    "$.testgroup",
+    "$.device"
+  ]
+}

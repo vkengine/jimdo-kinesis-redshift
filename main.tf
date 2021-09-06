@@ -3,6 +3,18 @@ provider "aws" {
 }
 
 
+/*
+# this is to enable backend in case needed
+
+terraform {
+  backend "s3" {
+    bucket = "jimdo-terraform-backend-bucket"
+    key = "s3-redshift-lambda"
+    region = "us-west-2"
+  }
+}
+*/
+
 module "buckets" {
   source = "./infrastructure/account_a/buckets"
 }
@@ -37,3 +49,16 @@ module "redshift_cluster" {
 module "security_group" {
   source = "./infrastructure/account_b/security_group"
 }
+
+
+module "account_b_bucket" {
+  source = "./infrastructure/account_b/buckets"
+}
+
+module "account_b_roles" {
+  source = "./infrastructure/account_b/roles"
+}
+
+//module "account_b_security_group" {
+//  source = "./infrastructure/account_b/security_group"
+//}

@@ -17,4 +17,7 @@ destroy:
 	@echo -n "Are you sure you want to destroy environment? [y/N] " && read ans && if [ $${ans:-'N'} = 'y' ]; then make destroy-infra; fi
 
 dump-dummy-data:
-	python ./lambda/write_to_k_stream.py
+	python ./python_scripts/write_to_k_stream.py
+
+create-redshift-table:
+	python ./python_scripts/create_tables.py
