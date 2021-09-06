@@ -1,5 +1,5 @@
 provider "aws" {
-  profile = "default"
+  profile = "buildyourjazz"
   region  = var.bucket_region
 }
 

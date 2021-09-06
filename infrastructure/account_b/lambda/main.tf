@@ -1,5 +1,5 @@
 provider "aws" {
-  profile    = "default"
+  profile    = "buildyourjazz"
   region     = var.aws_region
 }
 
@@ -7,24 +7,24 @@ provider "aws" {
 module "lambda_function_with_vpc" {
   source = "terraform-aws-modules/lambda/aws"
 
-  create_role   = false
-  attach_cloudwatch_logs_policy = false
+  create_role   = true
+  attach_cloudwatch_logs_policy = true
   attach_policy = false
   attach_network_policy = false
   store_on_s3 = true
 
-  function_name = "trigger_realtime_email_dag"
+  function_name = "s3-redshift-copy"
   description   = "deployed by terraform"
-  handler       = "trigger_realtime_successful_sync.lambda_handler"
-  runtime       = "python3.8"
+  handler       = "copy_to_redshift.lambda_handler"
+  runtime       = "python3.7"
 
-  source_path = "sync_lambda"
+  source_path = "s3_redshift_lambda"
   lambda_role = var.lambda_role
   s3_bucket   = var.s3_bucket
   timeout = 900
 
 
   tags = {
-    Name = "trigger_realtime_email_dag"
+    Name = "s3-redshift-copy"
   }
 }

@@ -5,5 +5,5 @@ variable "bucket_region" {
 
 variable "lambda_package_bucket_name" {
   type = string
-  default = "jimdo-lambda-package-bucket"
+  default = "jimdo-lambda-package-bucket-buj"
 }

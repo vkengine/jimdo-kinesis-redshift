@@ -4,6 +4,7 @@
 *.tfstate.*
 *.lock.*
 *.plan.*
+build
 
 # ide files
 .idea

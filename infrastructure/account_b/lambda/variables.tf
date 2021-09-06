@@ -1,5 +1,5 @@
 variable "s3_bucket" {
-  default = "jimdo-lambda-package-bucket"
+  default = "jimdo-lambda-package-bucket-buj"
 }
 
 variable "lambda_role" {

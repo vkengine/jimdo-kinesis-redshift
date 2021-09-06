@@ -19,5 +19,5 @@ destroy:
 dump-dummy-data:
 	python ./python_scripts/write_to_k_stream.py
 
-create-redshift-table:
+create-redshift-tables:
 	python ./python_scripts/create_tables.py

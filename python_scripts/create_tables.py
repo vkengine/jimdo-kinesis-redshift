@@ -48,7 +48,7 @@ def create_tables(connection):
     cur.execute(user_utm_table)
     conn.commit()
 
-    logger.info("tables created")
+    print('tables created')
 
 
 def db_connection():

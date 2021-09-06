@@ -52,6 +52,34 @@ Python >= v3.0.0
 At the time of development the latest version of terraform was v1.0.6
 and backward/forward compatibility is solely dependent on a provider(in this case HashiCorp)
 
+** user should you should have access to create resources on both AWS accounts: 
+Profile should be configured properly
+[configuring multiple profile aws](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
+quick check:
+
+credentials :
+```
+cat ~/.aws/credentials  
+[default]
+aws_access_key_id = {account_a access key}
+aws_secret_access_key = {account_a access key secret}
+
+[buildyourjazz]
+aws_access_key_id = {account_a access key}
+aws_secret_access_key = {account_a access key secret} 
+```
+config :
+```
+cat ~/.aws/config 
+[default]
+region = eu-central-1
+output = json
+
+[profile buildyourjazz]
+region = eu-central-1
+output = json
+```
+
     
 ## Repo Structure
 ```
@@ -60,7 +88,7 @@ Project/
 |   |-- account_a(resources specific to account a)
 |   |-- account_b(resources specific to account b)    
 |
-|-- lambda/
+|-- python script/
 |   |-- write_to_k_stream (dummy file to generate some data)
 |   |-- load to reshift
 |
@@ -69,32 +97,66 @@ Project/
 ```
 
 ## Getting Started
-create these two files in project root :
+create these two files in project :
 * .env
 ```
-this should from account a with s3 access
+this should from account_a with s3 access
+path to put this env file :
+Project/
+|-- infrastructure (all terraform script)/
+|   |-- account_a(resources specific to account a)
+|   |-- account_b(resources specific to account b)
+|       |--buckets 
+|       |--redshift
+|       |--roles
+|       |--secirity_groups
+|       |--lambda
+|           |--s3_lambda_redshift
+|           |-- .env(place it here as for it to be packaged and deployed)
+
+
+.env file content: 
+
 access_key_id=<your_value>
 secret_access_key=<your_key>
 ```
 * build.tfvars
 ```
+path to put this env file :
+Project/
+|-- infrastructure (all terraform script)/
+|-- python script/
+|-- build.tfvars
+
+
+content of build.tfvars :
+
 redshift_master_username = <your_username>
 redshift_mastr_password = <your_password>
 ```
 
+
+
+### Follow these steps to build your infra
+
 1. To create Infra:
 ```make create-infra```
+   * outputs redshift cluster details
    
-2. to create some dummy data:
-```make create-infra```
+2. to create some dummy data in kinesis stream and dump to s3:
+```make dump-dummy-data```
+   * writes dummy data to kinesis stream
    
 3. To destroy infra:
 ```make destroy```
+   * destroys all infrastructure
+   
+4. create redshift tables:
+```make create-redshift-tables```
+   * creates redshift table in public schema
    
 
 # TODO :
 * lambda deployment - terraform (minor)
-* parmetrize lambda - to look for file in a bucket with provided keys (major)
 * script to scale up scale down redshift cluster (major - outside scope of this project)
-* fix readme (minor)
 

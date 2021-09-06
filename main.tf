@@ -15,6 +15,8 @@ terraform {
 }
 */
 
+/* Account A resources */
+
 module "buckets" {
   source = "./infrastructure/account_a/buckets"
 }
@@ -36,6 +38,9 @@ module "firehose_stream" {
   kinesis_role_arn = module.roles.kinesis_role_arn
 }
 
+
+/*Account B resources*/
+
 module "redshift_cluster" {
   source = "./infrastructure/account_b/redshift"
   redshift_cluster_name = "jimdo-redshift-cluster"
@@ -46,10 +51,9 @@ module "redshift_cluster" {
   redshift_master_password_v1 = var.redshift_mastr_password
 }
 
-module "security_group" {
+module "account_b_security_group" {
   source = "./infrastructure/account_b/security_group"
 }
-
 
 module "account_b_bucket" {
   source = "./infrastructure/account_b/buckets"
@@ -59,6 +63,6 @@ module "account_b_roles" {
   source = "./infrastructure/account_b/roles"
 }
 
-//module "account_b_security_group" {
-//  source = "./infrastructure/account_b/security_group"
-//}
+module "account_b_lambda" {
+  source = "./infrastructure/account_b/lambda"
+}
