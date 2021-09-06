@@ -1,7 +1,4 @@
 import boto3
-from datetime import datetime
-import calendar
-import random
 import time
 import json
 
@@ -22,7 +19,7 @@ def lambda_handler(event=None, context=None):
 
 
 def put_to_stream(count):
-    payload_user_stream = {
+    payload_user_utm = {
         "request_id": "fc417c2b-fe7a-4737-afe2-bec49c0ebd6f",
         "request_timestamp": "2020-06-01 00:00:24.000000",
         "cookie_id": "a09c4ca3-d142-4312-ba78-029c3355b8ef",
@@ -36,7 +33,7 @@ def put_to_stream(count):
         "referrer": "https://register.jimdo.com/es/product"
     }
 
-    payload_user_utm = {
+    payload_user_event = {
         "request_id": "cbae8544-ab7a-46a5-9253-a5c8f6612115",
         "source": "adwords",
         "medium": "cpc",
@@ -55,7 +52,7 @@ def put_to_stream(count):
 
     k_client.put_record(
         DeliveryStreamName=stream_name_user_event,
-        Record={'Data': json.dumps(payload_user_stream)}
+        Record={'Data': json.dumps(payload_user_event)}
     )
 
     k_client.put_record(

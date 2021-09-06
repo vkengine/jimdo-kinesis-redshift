@@ -54,7 +54,21 @@ and backward/forward compatibility is solely dependent on a provider(in this cas
 
     
 ## Repo Structure
+```
+Project/
+|-- infrastructure (all terraform script)/
+|   |-- account_a(resources specific to account a)
+|   |-- account_b(resources specific to account b)    
+|
+|-- lambda/
+|   |-- write_to_k_stream (dummy file to generate some data)
+|   |-- load to reshift
+|
+|-- makefile
+|-- README
+```
 
 ## Getting Started
+
 
 

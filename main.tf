@@ -23,3 +23,17 @@ module "firehose_stream" {
   user_utm_bucket_arn = module.buckets.user_utm_bucket_arn
   kinesis_role_arn = module.roles.kinesis_role_arn
 }
+
+module "redshift_cluster" {
+  source = "./infrastructure/account_b/redshift"
+  redshift_cluster_name = "jimdo-redshift-cluster"
+  redshift_database_name = "jimdo"
+  redshift_node_type = "dc2.Large"
+  redshift_cluster_type = "single-node"
+  redshift_master_username = var.redshift_master_username
+  redshift_master_password_v1 = var.redshift_mastr_password
+}
+
+module "security_group" {
+  source = "./infrastructure/account_b/security_group"
+}
